@@ -1,0 +1,22 @@
+<style>
+button {
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    color: cyan !important;
+    text-decoration: none;
+    cursor: pointer;
+    border: none !important;
+}
+button:hover {
+    text-decoration: none;
+    color: blue !important;
+}
+button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    color: blue !important;
+}
+<comment> hello
+</style>
+<res>
