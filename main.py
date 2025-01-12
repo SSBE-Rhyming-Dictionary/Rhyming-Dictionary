@@ -3,6 +3,8 @@ import pandas as pd #Dataframe to be used with Streamlit
 import streamlit as st #Data visualizer
 import time as time #Used for the "stopwatch" or "timer", optional
 import json as json #Used to write to or read from the sorted data file
+import os
+import arff
 
 ### Instructions for other usersm
 #Press the run button in your VSC terminal (top right-hand corner)
@@ -10,9 +12,6 @@ import json as json #Used to write to or read from the sorted data file
 
 
 ### VARIABLES
-
-#streamlit run /Users/munzhong-school/rhyme/main.py
-#For my reference, paste it into the terminal to run the code
 
 realDataSet = True #Whether to use RM-AZ or the shortened dataset
 disableOverflow = False #Whether to disable text overflow (Show All button)
@@ -61,8 +60,11 @@ dict = []
 
 print("Initializing... (0)")
 
+def formatFileNameAsDirectory(name):
+  return arff.load(open('raw.githubusercontent/Discwebhook/Rhyme-Dictionary/main/'+name))
+
 def getTextFromInfoFile(num):
-  with open(infoFileName+'.txt', 'r') as file:
+  with open(formatFileNameAsDirectory(infoFileName+'.txt'), 'r') as file:
     filecontent = file.read().split("<res>")[num-1].split("\n")
     for p in range(len(filecontent)):
       if filecontent[p].rfind("<comment>") > -.5:
@@ -73,10 +75,10 @@ def getTextFromInfoFile(num):
 
 confirmButtonMarkdown = getTextFromInfoFile(1)
 
-def listToText(ls):
-  return json.dumps(ls, separators=(',', ':'))
-def textToList(ls):
-  return json.loads(ls)
+def listToText(list):
+  return json.dumps(list, separators=(',', ':'))
+def textToList(text):
+  return json.loads(text)
 #These functions convert lists to JSON text format (listToText) and back (textToList).
 #They help with saving and loading structured data.
 
@@ -123,7 +125,7 @@ def squeezeInPosition(value,position):
 
 def sortCommonWords():
   lis = []
-  with open(commonWordsFileName+'.txt', 'r') as file:
+  with open(formatFileNameAsDirectory(commonWordsFileName+'.txt'), 'r') as file:
     lis = file.readlines()
   lis = sorted(lis)
   nl = []
@@ -323,7 +325,7 @@ def returnMainDataFrame(newlist,showUncommonWords):
 #This shortens the runtime from 12-13s to a measly 0.2s.
 if useSortedData:
   print("Retrieving data...")
-  with open(sortedDataName+".txt") as fli:
+  with open(formatFileNameAsDirectory(sortedDataName+".txt")) as fli:
     dict = textToList(fli.read())
 else:
   print("Preparing list...")
@@ -331,7 +333,7 @@ else:
   #We cannot use the original method of directly adding to dict to avoid confusion
   #Because Stress Importance was added near the end of our project.
 
-  with open(filename+'.txt', 'r') as file:
+  with open(formatFileNameAsDirectory(filename+'.txt'), 'r') as file:
     for i in file:
       plaintxt = i.split("▶") #Splits word and SSBE
       if len(plaintxt) < 2:
@@ -376,13 +378,11 @@ else:
     dict[i].append(str(freq))
     #Appends the stressed or unstressed vowel pattern and the syllables
   #printdict()
-  with open(sortedDataName+".txt","w") as fli:
+  with open(formatFileNameAsDirectory(sortedDataName+".txt"),"w") as fli:
     fli.write(listToText(dict))
 
   print(f"Ready ({(round((getTime()-upt)//100))*0.1}s)")
 
-if not realDataSet:
-  kuru = st.warning("You are using the testing dataset!",icon="⚠️")
 l = st.header("RHYMING DICTIONARY")
 textinput = st.text_input("Your search term",key="w",max_chars=100,placeholder="...")
 enter= textinput.replace("'","’").rstrip()
