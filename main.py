@@ -44,6 +44,13 @@ webFreqTable = [
 
 ### CODE ##
 
+isDarkMode = st_theme().base.lower()=="dark"
+
+st.error(st_theme().base)
+
+st.write(isDarkMode and "Dark" or "Light")
+st.write("Pushed")
+
 nl = []
 for i in copy.deepcopy(vowels):
   nl.append(i[0]+stressedVowel+(len(i)== 1 and " " or (i[min(1,len(i)-1)])))
@@ -211,10 +218,6 @@ def autoComplete(trm):
     return " (No matches found)"
 #Attempts to match an input term (trm) to the closest word based on a "penalty" system for incorrect characters
 #and length differences. It suggests the closest match if no exact match is found. Basically autocomplete.
-
-isDarkMode = st_theme().base.lower()=="dark"
-
-st.error(st_theme().base)
 
 def enclose(k,impt):
     sub = k.replace(" ", "-") #Format the text into link style
