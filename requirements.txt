@@ -2,4 +2,4 @@ streamlit
 pandas
 numpy
 arff
-streamlit_theme
+streamlit_javascript
