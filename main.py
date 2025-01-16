@@ -1,7 +1,6 @@
 ### MODULES ###
 import copy as copy #Deep copy tables
 import pandas as pd #Dataframe to be used with Streamlit
-print(streamlit_theme)
 from streamlit_javascript import st_javascript #Dark/Light mode check
 import streamlit as st #Data visualizer
 import time as time #Used for the "stopwatch" or "timer", optional
