@@ -72,6 +72,9 @@ def getTextFromInfoFile(num):
 
 confirmButtonMarkdown = getTextFromInfoFile(1)
 
+if isLightMode:
+  confirmButtonMarkdown = confirmButtonMarkdown.replace("cyan","blue")
+
 def listToText(ls):
   return json.dumps(ls, separators=(',', ':'))
 def textToList(ls):
