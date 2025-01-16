@@ -48,6 +48,8 @@ return_value = st_javascript("""function darkMode(i){return (window.matchMedia &
 
 isDarkMode = return_value
 
+st.write(isDarkMode)
+
 nl = []
 for i in copy.deepcopy(vowels):
   nl.append(i[0]+stressedVowel+(len(i)== 1 and " " or (i[min(1,len(i)-1)])))
