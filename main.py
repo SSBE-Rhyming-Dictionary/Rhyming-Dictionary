@@ -1,7 +1,6 @@
 ### MODULES ###
 import copy as copy #Deep copy tables
 import pandas as pd #Dataframe to be used with Streamlit
-import streamlit_theme as streamlit_theme
 print(streamlit_theme)
 from streamlit_javascript import st_javascript #Dark/Light mode check
 import streamlit as st #Data visualizer
