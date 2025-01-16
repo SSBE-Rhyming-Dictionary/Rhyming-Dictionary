@@ -46,7 +46,7 @@ webFreqTable = [
 
 st_theme = st_javascript("""window.getComputedStyle(window.parent.document.getElementsByClassName("stApp")[0]).getPropertyValue("color-scheme")""")
 
-isDarkMode = (st_theme.lower() == "dark")
+isDarkMode = (st_theme == "dark")
 
 st.write(isDarkMode)
 
