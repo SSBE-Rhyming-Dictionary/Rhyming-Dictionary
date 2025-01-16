@@ -44,9 +44,9 @@ webFreqTable = [
 
 ### CODE ##
 
-return_value = st_javascript("""function darkMode(i){return (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)}(1)""")
+st_theme = st_javascript("""window.getComputedStyle(window.parent.document.getElementsByClassName("stApp")[0]).getPropertyValue("color-scheme")""")
 
-isDarkMode = return_value
+isDarkMode = (st_theme.lower() == "dark")
 
 st.write(isDarkMode)
 
