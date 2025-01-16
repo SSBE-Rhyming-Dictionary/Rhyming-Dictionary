@@ -3,7 +3,7 @@ import copy as copy #Deep copy tables
 import pandas as pd #Dataframe to be used with Streamlit
 import streamlit_theme as streamlit_theme
 print(streamlit_theme)
-from streamlit_theme import st_theme #Dark/Light mode check
+from streamlit_javascript import st_javascript #Dark/Light mode check
 import streamlit as st #Data visualizer
 import time as time #Used for the "stopwatch" or "timer", optional
 import json as json #Used to write to or read from the sorted data file
@@ -46,12 +46,11 @@ webFreqTable = [
 
 ### CODE ##
 
-isDarkMode = st_theme().base.lower()=="dark"
+return_value = st_javascript("""function darkMode(i){return (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)}(1)""")
 
-st.error(st_theme().base)
+isDarkMode = return_value
 
 st.write(isDarkMode and "Dark" or "Light")
-st.write("Pushed")
 
 nl = []
 for i in copy.deepcopy(vowels):
