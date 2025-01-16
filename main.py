@@ -48,8 +48,6 @@ return_value = st_javascript("""function darkMode(i){return (window.matchMedia &
 
 isDarkMode = return_value
 
-st.write(isDarkMode and "Dark" or "Light")
-
 nl = []
 for i in copy.deepcopy(vowels):
   nl.append(i[0]+stressedVowel+(len(i)== 1 and " " or (i[min(1,len(i)-1)])))
@@ -222,8 +220,8 @@ def enclose(k,impt):
     sub = k.replace(" ", "-") #Format the text into link style
     ff = '<sup><a style="color:Tomato;" href="https://www.dictionary.com/browse/' + sub + '">D</a>&nbsp;'
     af = '<a style="color:DodgerBlue;" href="https://www.thesaurus.com/browse/' + sub + '">T</a></sup>&nbsp;'
-    formattedStr = '<b style="color:'+(isDarkMode and "Black" or "Azure")+';"><u>' + k + "</u></b>"
-    originalStr = '<span style="color:LightGrey;">' + k.replace(" ","&nbsp;") + "</span>"
+    formattedStr = '<b style="color:'+(isDarkMode and "DimGray" or "Azure")+';"><u>' + k + "</u></b>"
+    originalStr = '<span style="color:'+(isDarkMode and "Black" or "LightGrey")+';">' + k.replace(" ","&nbsp;") + "</span>"
     #Use &nbsp; aka non breaking space to prevent the text from carrying over to the next line
     return "".join([formattedStr if impt else originalStr, ff, af])
 #Add hyperlinks (to the dictionary and thesarus) to k (The word).
