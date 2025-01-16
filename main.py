@@ -46,7 +46,7 @@ webFreqTable = [
 
 st_theme = st_javascript("""window.getComputedStyle(window.parent.document.getElementsByClassName("stApp")[0]).getPropertyValue("color-scheme")""")
 
-isLightMode = (st_theme == "dark")
+isLightMode = not (st_theme == "dark")
 
 nl = []
 for i in copy.deepcopy(vowels):
