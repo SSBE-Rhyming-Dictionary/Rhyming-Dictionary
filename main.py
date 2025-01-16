@@ -1,7 +1,9 @@
 ### MODULES ###
 import copy as copy #Deep copy tables
 import pandas as pd #Dataframe to be used with Streamlit
-from streamlit_theme import st-theme #Dark/Light mode check
+import streamlit_theme as streamlit_theme
+print(streamlit_theme)
+from streamlit_theme import st_theme #Dark/Light mode check
 import streamlit as st #Data visualizer
 import time as time #Used for the "stopwatch" or "timer", optional
 import json as json #Used to write to or read from the sorted data file
