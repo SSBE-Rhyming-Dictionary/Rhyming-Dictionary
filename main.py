@@ -46,9 +46,7 @@ webFreqTable = [
 
 st_theme = st_javascript("""window.getComputedStyle(window.parent.document.getElementsByClassName("stApp")[0]).getPropertyValue("color-scheme")""")
 
-isDarkMode = (st_theme == "dark")
-
-st.write(isDarkMode)
+isLightMode = (st_theme == "dark")
 
 nl = []
 for i in copy.deepcopy(vowels):
@@ -222,8 +220,8 @@ def enclose(k,impt):
     sub = k.replace(" ", "-") #Format the text into link style
     ff = '<sup><a style="color:Tomato;" href="https://www.dictionary.com/browse/' + sub + '">D</a>&nbsp;'
     af = '<a style="color:DodgerBlue;" href="https://www.thesaurus.com/browse/' + sub + '">T</a></sup>&nbsp;'
-    formattedStr = '<b style="color:'+(isDarkMode and "DimGray" or "Azure")+';"><u>' + k + "</u></b>"
-    originalStr = '<span style="color:'+(isDarkMode and "Black" or "LightGrey")+';">' + k.replace(" ","&nbsp;") + "</span>"
+    formattedStr = '<b style="color:'+(isLightMode and "DimGray" or "Azure")+';"><u>' + k + "</u></b>"
+    originalStr = '<span style="color:'+(isLightMode and "Black" or "LightGrey")+';">' + k.replace(" ","&nbsp;") + "</span>"
     #Use &nbsp; aka non breaking space to prevent the text from carrying over to the next line
     return "".join([formattedStr if impt else originalStr, ff, af])
 #Add hyperlinks (to the dictionary and thesarus) to k (The word).
