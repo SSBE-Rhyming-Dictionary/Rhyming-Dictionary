@@ -1,18 +1,14 @@
+### MODULES ###
 import copy as copy #Deep copy tables
 import pandas as pd #Dataframe to be used with Streamlit
+from streamlit_theme import st_theme #Dark/Light mode check
 import streamlit as st #Data visualizer
 import time as time #Used for the "stopwatch" or "timer", optional
 import json as json #Used to write to or read from the sorted data file
-import os
-import arff
 
-### Instructions for other usersm
-#Press the run button in your VSC terminal (top right-hand corner)
-#Follow the Terminal's instructions to open Streamlit
+### Link: https://ssbe-rhyming-dictionary.streamlit.app/
 
-
-### VARIABLES
-
+### VARIABLES ###
 realDataSet = True #Whether to use RM-AZ or the shortened dataset
 disableOverflow = False #Whether to disable text overflow (Show All button)
 limit = 14 #Starts from the 0th index, limit+1 is the max number of results to display before pressing Show All.
@@ -26,13 +22,13 @@ uncommonWordThreshold = 3 #Anything equal to or below this is considered an unco
 filename = realDataSet and 'RM-AZ' or 'NewRMAZ' #Text files
 stressedVowel = "ɛ́"[1] #The special vowel stress character
 nonBreakingSpace = "\u00A0" #A space that does not carry over to the new line!
-commonWordsFileName = "CommonWords" #Common words file to extract from
 infoFileName = "infofile" #Information
 sortedDataName = "SortedData"
 
+### VOWELS ###
 vowels = ["ɪ","ɛ","a","ɔ","ɵ","ə","ʌ","ɪj","ɛj",'ɑj',"oj","aw","əw","ʉw","ɪː","ɛː","ɑː","oː","ɵː","əː","ó"]
 
-
+### WEB FREQUENCY ###
 webFreqTable = [
   0,
   10,
@@ -46,7 +42,7 @@ webFreqTable = [
   1000000000
 ] #Last element has a web frequency unit of 10 (Or is it 9? I forgot)
 
-### CODE
+### CODE ##
 
 nl = []
 for i in copy.deepcopy(vowels):
@@ -60,11 +56,8 @@ dict = []
 
 print("Initializing... (0)")
 
-def formatFileNameAsDirectory(name):
-  return arff.load(open('raw.githubusercontent/Discwebhook/Rhyme-Dictionary/main/'+name))
-
 def getTextFromInfoFile(num):
-  with open(formatFileNameAsDirectory(infoFileName+'.txt'), 'r') as file:
+  with open(infoFileName+'.txt', 'r') as file:
     filecontent = file.read().split("<res>")[num-1].split("\n")
     for p in range(len(filecontent)):
       if filecontent[p].rfind("<comment>") > -.5:
@@ -75,10 +68,10 @@ def getTextFromInfoFile(num):
 
 confirmButtonMarkdown = getTextFromInfoFile(1)
 
-def listToText(list):
-  return json.dumps(list, separators=(',', ':'))
-def textToList(text):
-  return json.loads(text)
+def listToText(ls):
+  return json.dumps(ls, separators=(',', ':'))
+def textToList(ls):
+  return json.loads(ls)
 #These functions convert lists to JSON text format (listToText) and back (textToList).
 #They help with saving and loading structured data.
 
@@ -123,31 +116,7 @@ def squeezeInPosition(value,position):
   dict[position] = value
 #Shifts all elements at position+1 up, then inserts a value into position. Same as pop.
 
-def sortCommonWords():
-  lis = []
-  with open(formatFileNameAsDirectory(commonWordsFileName+'.txt'), 'r') as file:
-    lis = file.readlines()
-  lis = sorted(lis)
-  nl = []
-  for i in range(len(lis)):
-    lis[i] = lis[i].rstrip().lower()
-  for i in range(len(dict)):
-    nl.append(dict[i][2].rstrip())
-  return [word for word in nl if word in lis]
-#Return the list of commonly used words that the rhyme dictionary has.
 
-def sortCommonWordsList():
-  lis = []
-  with open(commonWordsFileName+'.txt', 'r') as file:
-      lis = file.readlines()
-  r = ""
-  lis = sorted(lis)
-  for i in range(len(lis)):
-    r = r+(i==0 and "" or "")+lis[i].lower()
-  f = open(commonWordsFileName+".txt", "w")
-  f.write(r)
-  f.close()
-#Not used at the moment. Call this to sort the common words file list alphabetically.
 
 def stressedAndUnstress(ipa):
   parse = ipa.split(" ")
@@ -243,11 +212,15 @@ def autoComplete(trm):
 #Attempts to match an input term (trm) to the closest word based on a "penalty" system for incorrect characters
 #and length differences. It suggests the closest match if no exact match is found. Basically autocomplete.
 
+isDarkMode = st_theme().base.lower()=="dark"
+
+st.error(st_theme().base)
+
 def enclose(k,impt):
     sub = k.replace(" ", "-") #Format the text into link style
     ff = '<sup><a style="color:Tomato;" href="https://www.dictionary.com/browse/' + sub + '">D</a>&nbsp;'
     af = '<a style="color:DodgerBlue;" href="https://www.thesaurus.com/browse/' + sub + '">T</a></sup>&nbsp;'
-    formattedStr = '<b style="color:Azure;"><u>' + k + "</u></b>"
+    formattedStr = '<b style="color:'+(isDarkMode and "Black" or "Azure")+';"><u>' + k + "</u></b>"
     originalStr = '<span style="color:LightGrey;">' + k.replace(" ","&nbsp;") + "</span>"
     #Use &nbsp; aka non breaking space to prevent the text from carrying over to the next line
     return "".join([formattedStr if impt else originalStr, ff, af])
@@ -325,7 +298,7 @@ def returnMainDataFrame(newlist,showUncommonWords):
 #This shortens the runtime from 12-13s to a measly 0.2s.
 if useSortedData:
   print("Retrieving data...")
-  with open(formatFileNameAsDirectory(sortedDataName+".txt")) as fli:
+  with open(sortedDataName+".txt") as fli:
     dict = textToList(fli.read())
 else:
   print("Preparing list...")
@@ -333,7 +306,7 @@ else:
   #We cannot use the original method of directly adding to dict to avoid confusion
   #Because Stress Importance was added near the end of our project.
 
-  with open(formatFileNameAsDirectory(filename+'.txt'), 'r') as file:
+  with open(filename+'.txt', 'r') as file:
     for i in file:
       plaintxt = i.split("▶") #Splits word and SSBE
       if len(plaintxt) < 2:
@@ -378,11 +351,13 @@ else:
     dict[i].append(str(freq))
     #Appends the stressed or unstressed vowel pattern and the syllables
   #printdict()
-  with open(formatFileNameAsDirectory(sortedDataName+".txt"),"w") as fli:
+  with open(sortedDataName+".txt","w") as fli:
     fli.write(listToText(dict))
 
   print(f"Ready ({(round((getTime()-upt)//100))*0.1}s)")
 
+if not realDataSet:
+  kuru = st.warning("You are using the testing dataset!",icon="⚠️")
 l = st.header("RHYMING DICTIONARY")
 textinput = st.text_input("Your search term",key="w",max_chars=100,placeholder="...")
 enter= textinput.replace("'","’").rstrip()
