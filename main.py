@@ -6,8 +6,6 @@ import streamlit as st #Data visualizer
 import time as time #Used for the "stopwatch" or "timer", optional
 import json as json #Used to write to or read from the sorted data file
 
-### Link: https://ssbe-rhyming-dictionary.streamlit.app/
-
 ### VARIABLES ###
 realDataSet = True #Whether to use RM-AZ or the shortened dataset
 disableOverflow = False #Whether to disable text overflow (Show All button)
