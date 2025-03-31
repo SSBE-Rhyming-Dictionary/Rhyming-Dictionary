@@ -454,8 +454,8 @@ def rhyme_search_page():
     isSummary, showUncommonWords = False, True
     if not noResults:
       isSummary = st.toggle("Summary",False,"Sumry","Displays rhyming words as plain text only.")
-    if isSummary:
-      showUncommonWords = st.toggle("Show rarely used words",True,"Sruw")
+    #if isSummary:
+      #showUncommonWords = st.toggle("Show rarely used words",True,"Sruw")
     print("\nNEW RESULT")
     print("Search term:\""+enter+"\"")
     print("Results: "+str(len(mainlist)))
