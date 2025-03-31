@@ -6,5 +6,6 @@ Made by
 <a href="https://sites.google.com/view/test/" target="_blank" style="color: #4A90E2;">Mak Mun Zhong</a> and  
 <a href="https://sites.google.com/view/test/" target="_blank" style="color: #4A90E2;">Jayden Tan Yi Zhe</a></h3>.
 
-Development guided by <a href="https://www.instagram.com/szetodl/" target="_blank" style="color: #F1C40F;">Mr. Szeto Dillion</a></h4>
-Database from the <a href="http://seas.elte.hu/cube/" target="_blank" style="color: #E74C3C;">Cube Dictionary</a></h4>
+Development guided by <a href="https://www.instagram.com/szetodl/" target="_blank" style="color: #F1C40F;">Mr. Szeto Dillion</a></h4>.
+
+Standard Southern British English Database from the <a href="http://seas.elte.hu/cube/" target="_blank" style="color: #E74C3C;">CUBE Dictionary</a></h4>.
