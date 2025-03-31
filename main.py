@@ -521,7 +521,8 @@ def rhyme_search_page():
             
             with containerDataframe:
               dataframe = HTMLed(pd.DataFrame(smalldata).rename_axis('Result Num', axis=1))
-              dataTM = st.dataframe(dataframe, 1000,len(data["Name"])==0 and 0 or 35*(resultNum-overflow+1))
+              row_height2=int(len(data["Name"])==0 and 0 or 37*(resultNum-overflow+1)/(resultNum-overflow+1))
+              dataTM = st.dataframe(dataframe, 1000,len(data["Name"])==0 and 0 or 37*(resultNum-overflow+1),row_height=row_height2)
             
             containerButton = st.empty() #Create a containers to store the "Show All" button to (possibly) delete later.
             with containerButton:
@@ -532,11 +533,13 @@ def rhyme_search_page():
               containerButton.empty() #Deletes the previously compacted table of results.
               containerDataframe.empty() #Deletes the "Show All" button.
               dataframe = HTMLed(pd.DataFrame(data).rename_axis('Result Num', axis=1)) #Shows the full table instead.
-              dataTM = st.dataframe(dataframe,1000,len(data["Name"])==0 and 0 or 36*(resultNum+1))
+              row_height2=int(len(data["Name"])==0 and 0 or 37*(resultNum+1)/(resultNum+1))
+              dataTM = st.dataframe(dataframe,1000,len(data["Name"])==0 and 0 or 37*(resultNum+1),row_height=row_height2)
           else:
             #Nothing special done, just shows the original table
             dataframe = HTMLed(pd.DataFrame(data).rename_axis('Result Num', axis=1))
-            dataTM = st.dataframe(dataframe,1000,len(data["Name"])==0 and 0 or 36*(resultNum+1))
+            row_height2=int(len(data["Name"])==0 and 0 or 37*(resultNum+1)/(resultNum+1))
+            dataTM = st.dataframe(dataframe,1000,len(data["Name"])==0 and 0 or 37*(resultNum+1),row_height=row_height2)
         #Generate dataframe (table) for each response
   
   # Back button to return to the main page
