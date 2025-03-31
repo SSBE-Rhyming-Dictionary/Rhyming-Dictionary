@@ -6,6 +6,8 @@ import streamlit as st #Data visualizer
 import time as time #Used for the "stopwatch" or "timer", optional
 import json as json #Used to write to or read from the sorted data file
 
+### Link: https://ssbe-rhyming-dictionary.streamlit.app/
+
 ### VARIABLES ###
 realDataSet = True #Whether to use RM-AZ or the shortened dataset
 disableOverflow = False #Whether to disable text overflow (Show All button)
@@ -120,8 +122,6 @@ def squeezeInPosition(value,position):
     dict[i+1] = dict[i]
   dict[position] = value
 #Shifts all elements at position+1 up, then inserts a value into position. Same as pop.
-
-
 
 def stressedAndUnstress(ipa):
   parse = ipa.split(" ")
@@ -359,103 +359,203 @@ else:
 
 if not realDataSet:
   kuru = st.warning("You are using the testing dataset!",icon="⚠️")
-l = st.header("RHYMING DICTIONARY")
-textinput = st.text_input("Your search term",key="w",max_chars=100,placeholder="...")
-enter= textinput.replace("'","’").rstrip()
 
-mainlist = copy.deepcopy(narrowList(enter))
-totalLength = 0 #Number of pronunciation results from narrowList
-for i in removeDupesList(mainlist):
-  totalLength += len(mainlist[i])
-
-if len(enter) == 0:
-    'Enter a term to get started!' #Term is empty
-else:
-  noResults = totalLength==0
-  'Your term: ', enter.title() , (noResults and autoComplete(enter) or (" ("+str(totalLength))+" matches found)")
-  isSummary, showUncommonWords = False, True
-  if not noResults:
-    isSummary = st.toggle("Summary",False,"Sumry","Displays rhyming words as plain text only.")
-  if isSummary:
-    showUncommonWords = st.toggle("Show rarely used words",True,"Sruw")
-  print("\nNEW RESULT")
-  print("Search term:\""+enter+"\"")
-  print("Results: "+str(len(mainlist)))
-
-  if disableOverflow:
-    overflow = 0
+def home_page():
+  st.header("SSBE RHYMING DICTIONARY")
+  st.markdown("""
+    <h3 style='text-align: left; font-size: 20px; margin-top: -10px;'>Made by 
+    <a href="https://sites.google.com/view/gavrielchia/" target="_blank" style="color: #4A90E2;">Gavriel Chia</a> and 
+    <a href="https://sites.google.com/view/test/" target="_blank" style="color: #4A90E2;">Mak Mun Zhong</a> and  
+    <a href="https://sites.google.com/view/test/" target="_blank" style="color: #4A90E2;">Jayden Tan Yi Zhe</a></h3>
+    <h4 style='text-align: left; font-size: 18px; margin-top: -5px;'>Development guided by 
+    <a href="https://www.instagram.com/szetodl/" target="_blank" style="color: #F1C40F;">Mr. Szeto Dillion</a></h4>
+    <h4 style='text-align: left; font-size: 18px; margin-top: -5px;'>Database from the 
+    <a href="http://seas.elte.hu/cube/" target="_blank" style="color: #E74C3C;">CUBE Dictionary</a></h4>
+    """, unsafe_allow_html=True)
   
-  rhymeArray = [] #Store duplicate rhymes
+  # Buttons to navigate to other pages
+  col1, col2 = st.columns(2)
+  with col1:
+    if st.button("Go to Rhyming Search"):
+      st.session_state.page = "search"
+      st.rerun()  # Force a rerun to load the new page
+  with col2:
+    if st.button("About the Dictionary"):
+      st.session_state.page = "about"
+      st.rerun()  # Force a rerun to load the new page
 
-  storedResult = False #Initialize to nothing
-  if "LastSearchedTerm" in st.session_state:
-    storedResult = st.session_state["LastSearchedTerm"]
-  st.session_state["LastSearchedTerm"] = enter
+def about_page():
+  st.title("About the Rhyming Dictionary")
+  st.markdown("""
+      <p>This tool is a rhyming dictionary tool based on Standard Southern British English (SSBE) that helps you find rhymes for any word. This project is open sourced, and the code may be found <a href="https://github.com/Discwebhook/Rhyming-Dictionary" target="_blank" style="color: #4A90E2;">here</a>.</p>
+      """, unsafe_allow_html=True)
+  st.markdown("""
+      <h2 style='text-align: left; font-size: 20px; margin-top: 1px;'>Common Questions:</h2>
+      """, unsafe_allow_html=True)
+  st.markdown("""
+      <h4 style='text-align: left; font-size: 18px; margin-top: -5px;'>What is a rhyming dictionary?</h4>
+      """, unsafe_allow_html=True)
+  st.markdown("""
+      <p>A rhyming dictionary is a specialised dictionary where words that rhyme with each other are categorised together, often used when writing song lyrics and poetry.</p>
+      """, unsafe_allow_html=True)
+  st.markdown("""
+      <h4 style='text-align: left; font-size: 18px; margin-top: -5px;'>What is Standard Southern British English (SSBE)?</h4>
+      """, unsafe_allow_html=True)
+  st.markdown("""
+      <p>In the 20th century, Received Pronunciation (RP) was considered the standard educated pronunciation and the prestige variety of British English. 
+      However, Dr. Geoff Lindsey argues that from the late 20th century to the early 21st century, the pronunciation of the de-facto standard variety of British English in the southeast of England has shifted so significantly, 
+      such that several characteristics of RP sound outdated today. Therefore, this new "accent" of British English was transcripted into the International Phonetic Alphabet by him, resulting in the Current British English (CUBE) Dictionary. 
+      This transcription is known as SSBE.</p>
+      """, unsafe_allow_html=True)
+  st.markdown("""
+      <h4 style='text-align: left; font-size: 18px; margin-top: -5px;'>Why do we require a rhyming dictionary, particularly one for SSBE?</h4>
+      """, unsafe_allow_html=True)
+  st.markdown("""
+      <p>Due to the discrepancy between the phonologies of General American English (GenAm), Received Pronunciation (RP) and Standard Southern British English (SSBE), 
+      different sets of words rhyme with one another in each accent. Thus, different rhyming dictionaries are required for each accent.</p>
+      """, unsafe_allow_html=True)
+  st.markdown("""
+      <h4 style='text-align: left; font-size: 18px; margin-top: -5px;'>Where is the database from?:</h4>
+      """, unsafe_allow_html=True)
+  st.markdown("""
+      <p>The original database is the <a href="http://seas.elte.hu/cube/" target="_blank" style="color: #4A90E2;">Current British English (CUBE) Dictionary</a>, designed and compiled by Péter Szigetvári and Geoff Lindsey. Their database was drawn from a transcription dictionary by 
+      Ádám Nádasdy and Szigetvári (Huron’s English Pronouncing Dictionary/Huron angol kiejtési kézikönyv). What this application has done is reformatted and implemented an alorithm to find rhyming pairs of words. </p>
+      """, unsafe_allow_html=True)
+  st.markdown("""
+      <h2 style='text-align: left; font-size: 20px; margin-top: -10px;'>Queries and Contact Information:</h2>
+      """, unsafe_allow_html=True)
+  st.markdown("""
+      <p>This project was made by <a href="https://sites.google.com/view/gavrielchia/" target="_blank" style="color: #4A90E2;">Gavriel Chia</a> and 
+    <a href="https://github.com/Discwebhook" target="_blank" style="color: #4A90E2;">Mak Mun Zhong</a> and  
+    <a href="https://sites.google.com/view/test/" target="_blank" style="color: #4A90E2;">Jayden Tan Yi Zhe</a></h3>. 
+    The developmental process was guided by <a href="https://www.instagram.com/szetodl/" target="_blank" style="color: #4A90E2;">Mr. Szeto Dillion</a>. If you have any queries, do email us at: gavriel_chia_kai_ze@s2022.ssts.edu.sg or mak_mun_zhong@s2022.ssts.edu.sg</p>
+      """, unsafe_allow_html=True)
   
-  override = False
+  # Back button to return to the main page
+  if st.button("Back to Home"):
+    st.session_state.page = "home"
+    st.rerun()  # Force a rerun to load the new page
 
-  for j in range(len(mainlist)):
-    data,smalldata,resultNum,rm,compactWordsList,smallerWordsList,overflow = returnMainDataFrame(mainlist[j],showUncommonWords)
-    rhyme = rm[3]
-    ipa = rm[2]
-    enter = enter.rstrip()
-    matchr = False
+def rhyme_search_page():
+  st.header("SSBE RHYMING DICTIONARY")
+  textinput = st.text_input("Your search term",key="w",max_chars=100,placeholder="...")
+  enter= textinput.replace("'","’").rstrip()
 
-    for i in rhymeArray:
-      if i.lower() == rhyme.lower():
-        matchr = True
-    if matchr:
-      continue #Does the same word have the same rhyme?
+  mainlist = copy.deepcopy(narrowList(enter))
+  totalLength = 0 #Number of pronunciation results from narrowList
+  for i in removeDupesList(mainlist):
+    totalLength += len(mainlist[i])
 
-    rhymeArray.append(rhyme)
+  if len(enter) == 0:
+      'Enter a term to get started!' #Term is empty
+  else:
+    noResults = totalLength==0
+    'Your term: ', enter.title() , (noResults and autoComplete(enter) or (" ("+str(totalLength))+" matches found)")
+    isSummary, showUncommonWords = False, True
+    if not noResults:
+      isSummary = st.toggle("Summary",False,"Sumry","Displays rhyming words as plain text only.")
+    if isSummary:
+      showUncommonWords = st.toggle("Show rarely used words",True,"Sruw")
+    print("\nNEW RESULT")
+    print("Search term:\""+enter+"\"")
+    print("Results: "+str(len(mainlist)))
 
-    if "Override" in st.session_state:
-      override = (override or st.session_state["Override"] and (not storedResult or storedResult == enter))
-    if j == len(mainlist):
-      st.session_state["Override"] = (overflow > 0)
-    #This section of the code decides whether to automatically "Show All"
+    if disableOverflow:
+      overflow = 0
+    
+    rhymeArray = [] #Store duplicate rhymes
 
-    if len(data["Name"]) != 0:
-      st.text('Rhyme: "'+rhyme+'" ('+str(resultNum)+" Results)") #Label for each rhyme a word has
-      if isSummary:
-        if overflow > 0 and not override: #Has "Show All" not been clicked, and are there too many results?
-          containerTextResults = st.empty() 
-          containerShowAllButton = st.empty() #Create two containers to store the two components.
+    storedResult = False #Initialize to nothing
+    if "LastSearchedTerm" in st.session_state:
+      storedResult = st.session_state["LastSearchedTerm"]
+    st.session_state["LastSearchedTerm"] = enter
+    
+    override = False
 
-          with containerTextResults:
-            compacter = st.write(smallerWordsList,unsafe_allow_html=True)
-          with containerShowAllButton:
-            compactButton = st.button(str(overflow)+" Results Hidden, Show All",'kna'+rhyme)
+    for j in range(len(mainlist)):
+      data,smalldata,resultNum,rm,compactWordsList,smallerWordsList,overflow = returnMainDataFrame(mainlist[j],showUncommonWords)
+      rhyme = rm[3]
+      ipa = rm[2]
+      enter = enter.rstrip()
+      matchr = False
 
-          st.markdown(confirmButtonMarkdown, unsafe_allow_html=True)
-          
-          if compactButton:
-            containerTextResults.empty() #Deletes the previously compacted word list.
-            containerShowAllButton.empty() #Deletes the "Show All" button.
-            compacter = st.write(compactWordsList,unsafe_allow_html=True) #Shows the full word list instead.
+      for i in rhymeArray:
+        if i.lower() == rhyme.lower():
+          matchr = True
+      if matchr:
+        continue #Does the same word have the same rhyme?
+
+      rhymeArray.append(rhyme)
+
+      if "Override" in st.session_state:
+        override = (override or st.session_state["Override"] and (not storedResult or storedResult == enter))
+      if j == len(mainlist):
+        st.session_state["Override"] = (overflow > 0)
+      #This section of the code decides whether to automatically "Show All"
+
+      if len(data["Name"]) != 0:
+        st.text('Rhyme: "'+rhyme+'" ('+str(resultNum)+" Results)") #Label for each rhyme a word has
+        
+        if isSummary:
+          if overflow > 0 and not override: #Has "Show All" not been clicked, and are there too many results?
+            containerTextResults = st.empty() 
+            containerShowAllButton = st.empty() #Create two containers to store the two components.
+
+            with containerTextResults:
+              compacter = st.write(smallerWordsList,unsafe_allow_html=True)
+            with containerShowAllButton:
+              compactButton = st.button(str(overflow)+" Results Hidden, Show All",'kna'+rhyme)
+
+            st.markdown(confirmButtonMarkdown, unsafe_allow_html=True)
+            
+            if compactButton:
+              containerTextResults.empty() #Deletes the previously compacted word list.
+              containerShowAllButton.empty() #Deletes the "Show All" button.
+              compacter = st.write(compactWordsList,unsafe_allow_html=True) #Shows the full word list instead.
+          else:
+            compacter = st.write(compactWordsList,unsafe_allow_html=True) 
+            #Nothing special done, just shows the original words list
         else:
-          compacter = st.write(compactWordsList,unsafe_allow_html=True) 
-          #Nothing special done, just shows the original words list
-      else:
-        if overflow > 0 and not override: #Has "Show All" not been clicked, and are there too many results?
-          containerDataframe = st.empty() #Create a containers to store the compacted table of results to (possibly) delete later.
-          
-          with containerDataframe:
-            dataframe = HTMLed(pd.DataFrame(smalldata).rename_axis('Result Num', axis=1))
-            dataTM = st.dataframe(dataframe.style.highlight_max(axis=0),1000,len(data["Name"])==0 and 0 or 35*(resultNum-overflow+1))
-          
-          containerButton = st.empty() #Create a containers to store the "Show All" button to (possibly) delete later.
-          with containerButton:
-            showAllDataframe = st.button(str(overflow)+" Results Hidden, Show All",'kar'+rhyme)
-          st.markdown(confirmButtonMarkdown, unsafe_allow_html=True)
-          
-          if showAllDataframe:
-            containerButton.empty() #Deletes the previously compacted table of results.
-            containerDataframe.empty() #Deletes the "Show All" button.
-            dataframe = HTMLed(pd.DataFrame(data).rename_axis('Result Num', axis=1)) #Shows the full table instead.
-            dataTM = st.dataframe(dataframe.style.highlight_max(axis=0),1000,len(data["Name"])==0 and 0 or 36*(resultNum+1))
-        else:
-          #Nothing special done, just shows the original table
-          dataframe = HTMLed(pd.DataFrame(data).rename_axis('Result Num', axis=1))
-          dataTM = st.dataframe(dataframe.style.highlight_max(axis=0),1000,len(data["Name"])==0 and 0 or 36*(resultNum+1))
-      #Generate dataframe (table) for each response
+          if overflow > 0 and not override: #Has "Show All" not been clicked, and are there too many results?
+            containerDataframe = st.empty() #Create a containers to store the compacted table of results to (possibly) delete later.
+            
+            with containerDataframe:
+              dataframe = HTMLed(pd.DataFrame(smalldata).rename_axis('Result Num', axis=1))
+              dataTM = st.dataframe(dataframe, 1000,len(data["Name"])==0 and 0 or 35*(resultNum-overflow+1))
+            
+            containerButton = st.empty() #Create a containers to store the "Show All" button to (possibly) delete later.
+            with containerButton:
+              showAllDataframe = st.button(str(overflow)+" Results Hidden, Show All",'kar'+rhyme)
+            st.markdown(confirmButtonMarkdown, unsafe_allow_html=True)
+            
+            if showAllDataframe:
+              containerButton.empty() #Deletes the previously compacted table of results.
+              containerDataframe.empty() #Deletes the "Show All" button.
+              dataframe = HTMLed(pd.DataFrame(data).rename_axis('Result Num', axis=1)) #Shows the full table instead.
+              dataTM = st.dataframe(dataframe,1000,len(data["Name"])==0 and 0 or 36*(resultNum+1))
+          else:
+            #Nothing special done, just shows the original table
+            dataframe = HTMLed(pd.DataFrame(data).rename_axis('Result Num', axis=1))
+            dataTM = st.dataframe(dataframe,1000,len(data["Name"])==0 and 0 or 36*(resultNum+1))
+        #Generate dataframe (table) for each response
+  
+  # Back button to return to the main page
+  if st.button("Back to Home"):
+    st.session_state.page = "home"
+    st.rerun()  # Force a rerun to load the new page        
+        
+# Main function to display the page based on the session state
+def main():
+    # Initialize session state for navigation if not already done
+    if "page" not in st.session_state:
+        st.session_state.page = "home"
+
+    if st.session_state.page == "home":
+        home_page()
+    elif st.session_state.page == "search":
+        rhyme_search_page()
+    elif st.session_state.page == "about":
+        about_page()
+
+if __name__ == "__main__":
+    main()
