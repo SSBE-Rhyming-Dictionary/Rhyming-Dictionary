@@ -92,20 +92,3 @@ digraph RhymingDictionaryFlow {{
     GenerateDataFrame -> End [color={NEON_GREEN}];
 }}
 """
-
-st.title('🔄 Flowchart Visualizations for Rhyming Dictionary')
-
-st.markdown("""
-## Rhyming Dictionary Function Flowchart
-
-This flowchart provides an overview of the processes involved in the Rhyming Dictionary functionality.
-It covers everything from reading sorted data, processing IPA (International Phonetic Alphabet), 
-to displaying search results and generating data frames.
-""")
-
-st.graphviz_chart(flowchart_code)
-
-st.markdown("""
-### Key Functions:
-- **Lorem ipsum**: dolor sit amet.
-""")
