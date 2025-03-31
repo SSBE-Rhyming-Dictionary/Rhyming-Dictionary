@@ -365,7 +365,7 @@ def home_page():
   st.markdown("""
     <h3 style='text-align: left; font-size: 20px; margin-top: -10px;'>Made by 
     <a href="https://sites.google.com/view/gavrielchia/" target="_blank" style="color: #4A90E2;">Gavriel Chia</a> and 
-    <a href="https://github.com/Discwebhook" target="_blank" style="color: #4A90E2;">Mak Mun Zhong</a> and  
+    <a href="https://sites.google.com/view/test/" target="_blank" style="color: #4A90E2;">Mak Mun Zhong</a> and  
     <a href="https://sites.google.com/view/test/" target="_blank" style="color: #4A90E2;">Jayden Tan Yi Zhe</a></h3>
     <h4 style='text-align: left; font-size: 18px; margin-top: -5px;'>Development guided by 
     <a href="https://www.instagram.com/szetodl/" target="_blank" style="color: #F1C40F;">Mr. Szeto Dillion</a></h4>
@@ -432,7 +432,7 @@ def about_page():
       """, unsafe_allow_html=True)
   
   # Back button to return to the main page
-  if st.button("Back to Home"):
+  if st.button("Back to Home", type="primary"):
     st.session_state.page = "home"
     st.rerun()  # Force a rerun to load the new page
 
@@ -506,7 +506,7 @@ def rhyme_search_page():
             with containerShowAllButton:
               compactButton = st.button(str(overflow)+" Results Hidden, Show All",'kna'+rhyme)
 
-            st.markdown(confirmButtonMarkdown, unsafe_allow_html=True)
+            #st.markdown(confirmButtonMarkdown, unsafe_allow_html=True)
             
             if compactButton:
               containerTextResults.empty() #Deletes the previously compacted word list.
@@ -526,7 +526,7 @@ def rhyme_search_page():
             containerButton = st.empty() #Create a containers to store the "Show All" button to (possibly) delete later.
             with containerButton:
               showAllDataframe = st.button(str(overflow)+" Results Hidden, Show All",'kar'+rhyme)
-            st.markdown(confirmButtonMarkdown, unsafe_allow_html=True)
+            #st.markdown(confirmButtonMarkdown, unsafe_allow_html=True)
             
             if showAllDataframe:
               containerButton.empty() #Deletes the previously compacted table of results.
@@ -540,7 +540,7 @@ def rhyme_search_page():
         #Generate dataframe (table) for each response
   
   # Back button to return to the main page
-  if st.button("Back to Home"):
+  if st.button("Back to Home", type="primary"):
     st.session_state.page = "home"
     st.rerun()  # Force a rerun to load the new page        
         
