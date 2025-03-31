@@ -1,8 +1,8 @@
 # Rhyme-Dictionary
 <p>Our objective is to create a rhyme dictionary using Standard Southern British English (SSBE).</p>
-We are using [**Streamlit**](https://streamlit.io "Streamlit- A faster way to build and share data apps") to visualize and host our dictionary.
-
-st.markdown("""
+We are using 
+[**Streamlit**](https://streamlit.io "Streamlit- A faster way to build and share data apps")
+to visualize and host our dictionary.
 <h3 style='text-align: left; font-size: 20px; margin-top: -10px;'>Made by 
 <a href="https://sites.google.com/view/gavrielchia/" target="_blank" style="color: #4A90E2;">Gavriel Chia</a> and 
 <a href="https://sites.google.com/view/test/" target="_blank" style="color: #4A90E2;">Mak Mun Zhong</a> and  
@@ -11,4 +11,3 @@ st.markdown("""
 <a href="https://www.instagram.com/szetodl/" target="_blank" style="color: #F1C40F;">Mr. Szeto Dillion</a></h4>
 <h4 style='text-align: left; font-size: 18px; margin-top: -5px;'>Database from the 
 <a href="http://seas.elte.hu/cube/" target="_blank" style="color: #E74C3C;">Cube Dictionary</a></h4>
-""", unsafe_allow_html=True)
