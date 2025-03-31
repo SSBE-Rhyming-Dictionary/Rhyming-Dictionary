@@ -365,7 +365,7 @@ def home_page():
   st.markdown("""
     <h3 style='text-align: left; font-size: 20px; margin-top: -10px;'>Made by 
     <a href="https://sites.google.com/view/gavrielchia/" target="_blank" style="color: #4A90E2;">Gavriel Chia</a> and 
-    <a href="https://sites.google.com/view/test/" target="_blank" style="color: #4A90E2;">Mak Mun Zhong</a> and  
+    <a href="https://github.com/Discwebhook" target="_blank" style="color: #4A90E2;">Mak Mun Zhong</a> and  
     <a href="https://sites.google.com/view/test/" target="_blank" style="color: #4A90E2;">Jayden Tan Yi Zhe</a></h3>
     <h4 style='text-align: left; font-size: 18px; margin-top: -5px;'>Development guided by 
     <a href="https://www.instagram.com/szetodl/" target="_blank" style="color: #F1C40F;">Mr. Szeto Dillion</a></h4>
