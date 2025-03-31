@@ -9,3 +9,5 @@ Made by
 Development guided by <a href="https://www.instagram.com/szetodl/" target="_blank" style="color: #F1C40F;">Mr. Szeto Dillion</a></h4>.
 
 Standard Southern British English Database from the <a href="http://seas.elte.hu/cube/" target="_blank" style="color: #E74C3C;">CUBE Dictionary</a></h4>.
+
+The most recent release of the dictionary can be found <a href="https://stackoverflow.com/questions/77840571/the-app-has-not-been-released-on-appgallery-error-on-inappcomment-huawei-reque" target="_blank" style="color: #4A90E2;">here</a>.
