@@ -387,7 +387,7 @@ def home_page():
 def about_page():
   st.title("About the Rhyming Dictionary")
   st.markdown("""
-      <p>This tool is a rhyming dictionary tool based on Standard Southern British English (SSBE) that helps you find rhymes for any word. This project is open sourced, and the code may be found <a href="https://github.com/Discwebhook/Rhyming-Dictionary" target="_blank" style="color: #4A90E2;">here</a>.</p>
+      <p>This tool is a rhyming dictionary tool based on Standard Southern British English (SSBE) that helps you find rhymes for any word. This project is open sourced, and the code may be found <a href="https://github.com/SSBE-Rhyming-Dictionary/Rhyming-Dictionary" target="_blank" style="color: #4A90E2;">here</a>.</p>
       """, unsafe_allow_html=True)
   st.markdown("""
       <h2 style='text-align: left; font-size: 20px; margin-top: 1px;'>Common Questions:</h2>
