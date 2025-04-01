@@ -6,4 +6,4 @@ Made by
 <a href="https://github.com/Discwebhook" target="_blank" style="color: #4A90E2;">Mak Mun Zhong</a> and  
 <a href="https://sites.google.com/s2022.ssts.edu.sg/jayden-tan/" target="_blank" style="color: #4A90E2;">Jayden Tan Yi Zhe</a></h3>. Development is guided by <a href="https://www.instagram.com/szetodl/" target="_blank" style="color: #F1C40F;">Mr. Szeto Dillion</a></h4>. The Standard Southern British English Database from the <a href="http://seas.elte.hu/cube/" target="_blank" style="color: #E74C3C;">CUBE Dictionary</a></h4>.
 <p></p>
-The most recent release of the dictionary can be found <a href="https://stackoverflow.com/questions/77840571/the-app-has-not-been-released-on-appgallery-error-on-inappcomment-huawei-reque" target="_blank" style="color: #4A90E2;">here</a>.
+The most recent release of the dictionary can be found <a href="https://ssbe-rhyming-dictionary.streamlit.app" target="_blank" style="color: #4A90E2;">here</a>.
