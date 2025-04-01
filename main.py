@@ -365,8 +365,8 @@ def home_page():
   st.markdown("""
     <h3 style='text-align: left; font-size: 20px; margin-top: -10px;'>Made by 
     <a href="https://sites.google.com/view/gavrielchia/" target="_blank" style="color: #4A90E2;">Gavriel Chia</a> and 
-    <a href="https://sites.google.com/view/test/" target="_blank" style="color: #4A90E2;">Mak Mun Zhong</a> and  
-    <a href="https://sites.google.com/view/test/" target="_blank" style="color: #4A90E2;">Jayden Tan Yi Zhe</a></h3>
+    <a href="https://github.com/Discwebhook" target="_blank" style="color: #4A90E2;">Mak Mun Zhong</a> and  
+    <a href="https://sites.google.com/s2022.ssts.edu.sg/jayden-tan/" target="_blank" style="color: #4A90E2;">Jayden Tan Yi Zhe</a></h3>
     <h4 style='text-align: left; font-size: 18px; margin-top: -5px;'>Development guided by 
     <a href="https://www.instagram.com/szetodl/" target="_blank" style="color: #F1C40F;">Mr. Szeto Dillion</a></h4>
     <h4 style='text-align: left; font-size: 18px; margin-top: -5px;'>Database from the 
@@ -427,7 +427,7 @@ def about_page():
   st.markdown("""
       <p>This project was made by <a href="https://sites.google.com/view/gavrielchia/" target="_blank" style="color: #4A90E2;">Gavriel Chia</a> and 
     <a href="https://github.com/Discwebhook" target="_blank" style="color: #4A90E2;">Mak Mun Zhong</a> and  
-    <a href="https://sites.google.com/view/test/" target="_blank" style="color: #4A90E2;">Jayden Tan Yi Zhe</a></h3>. 
+    <a href="https://sites.google.com/s2022.ssts.edu.sg/jayden-tan/" target="_blank" style="color: #4A90E2;">Jayden Tan Yi Zhe</a></h3>. 
     The developmental process was guided by <a href="https://www.instagram.com/szetodl/" target="_blank" style="color: #4A90E2;">Mr. Szeto Dillion</a>. If you have any queries, do email us at: gavriel_chia_kai_ze@s2022.ssts.edu.sg or mak_mun_zhong@s2022.ssts.edu.sg</p>
       """, unsafe_allow_html=True)
   
