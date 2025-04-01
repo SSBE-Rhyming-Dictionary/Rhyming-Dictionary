@@ -369,7 +369,7 @@ def home_page():
     <a href="https://sites.google.com/s2022.ssts.edu.sg/jayden-tan/" target="_blank" style="color: #4A90E2;">Jayden Tan Yi Zhe</a></h3>
     <h4 style='text-align: left; font-size: 18px; margin-top: -5px;'>Development guided by 
     <a href="https://www.instagram.com/szetodl/" target="_blank" style="color: #F1C40F;">Mr. Szeto Dillion</a></h4>
-    <h4 style='text-align: left; font-size: 18px; margin-top: -5px;'>Database from the 
+    <h4 style='text-align: left; font-size: 18px; margin-top: -5px;'>SSBE Database from the 
     <a href="http://seas.elte.hu/cube/" target="_blank" style="color: #E74C3C;">CUBE Dictionary</a></h4>
     """, unsafe_allow_html=True)
   
